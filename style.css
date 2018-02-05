@@ -18,6 +18,9 @@ body {
     padding: 2px;
     border-radius: 0; }
 
+.botui-message-content-link {
+  color: #813772; }
+
 .botui-actions-text-input {
   color: #fff;
   border-bottom: 1px solid #fff; }
@@ -28,7 +31,13 @@ body {
   background: #813772; }
   .botui-actions-buttons-button:focus {
     outline: none; }
-  .botui-actions-buttons-button:hover {
-    transform: scale(0.95); }
+  @media (min-width: 768px) {
+    .botui-actions-buttons-button:hover {
+      transform: scale(0.95); } }
+  @media (max-width: 767px) {
+    .botui-actions-buttons-button {
+      width: 100%;
+      margin-top: 2px !important;
+      margin-left: 0 !important; } }
 
 /*# sourceMappingURL=style.css.map */

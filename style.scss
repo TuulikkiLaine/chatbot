@@ -43,6 +43,7 @@ body {
 }
 
 .botui-message-content-link {
+    color:$m-bg;
 }
 
 .botui-actions-text-input {
@@ -62,7 +63,14 @@ body {
         outline:none;
     }
     &:hover {
-        transform:scale(0.95);
+        @media(min-width:768px) {
+            transform:scale(0.95);
+        }
+    }
+    @media(max-width: 767px) {
+        width:100%;
+        margin-top:2px!important;
+        margin-left:0!important;
     }
 
 }

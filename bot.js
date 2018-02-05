@@ -65,11 +65,11 @@ function recommendMovie() {
         delay:delay,
         action: [
           {
-            text:'Something Sci-fi',
+            text:'Something sci-fi',
             value:'https://www.youtube.com/embed/Q0CbN8sfihY'
           },
           {
-            text:'Something Scary',
+            text:'Something scary',
             value:'https://www.youtube.com/embed/W2ot6ogGZNc'
           },
           {
@@ -162,11 +162,12 @@ bot.message.add({
   });
 }).then(function(res) {
   name = res.value
-  return bot.message.add('Hi ' + name + '! Nice to meet you. What would you like to talk about?');
+  return bot.message.add({
+    content:'Hi ' + name + '! Nice to meet you. What would you like to talk about?',
+  });
 }).then(function() {
   return bot.action.button({
     action: options,
-    delay: delay
   });
 }).then(function(res) {
   showOptions(res)
