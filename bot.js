@@ -153,7 +153,7 @@ function catFacts() {
 }
 
 bot.message.add({
-  content: 'Hello. Nice to meet you. What\'s your name?'
+  content: 'Hello there. What\'s your name?'
 }).then(function() {
     return bot.action.text({
     action: {
