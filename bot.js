@@ -104,7 +104,7 @@ function recommendSong() {
       return bot.action.button({
         action: [
           {
-            text:'Something from 80s',
+            text:'Something from the 80s',
             value:'https://www.youtube.com/embed/j2F4INQFjEI'
           },
           {

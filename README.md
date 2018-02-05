@@ -1,3 +1,3 @@
 # chatbot
 
-Chatbot built with botui.js
+Simple chatbot built with botui.js
