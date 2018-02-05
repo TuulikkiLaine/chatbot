@@ -1,4 +1,5 @@
 const bot = new BotUI('bot-wrapper');
+
 const options = [
   {
     text: 'Recommend a movie',
