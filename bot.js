@@ -44,7 +44,7 @@ function showOptions(res) {
 
 function goForward() {
   return bot.message.add({
-    content:'What would you like to do next?',
+    content:'What would you like to hear next?',
     delay:delay,
     })
     .then(function() {
