@@ -11,13 +11,58 @@ const options = [
   {
     text: 'Random Cat Facts',
     value: 2
+  },
+  {
+    text: 'Nah, I\'m good',
+    value: 3
   }
-]
+];
+const delay = 500;
+var name = '';
+
+function showOptions(res) {
+  if (res.value == 0) {
+      delete options[0];
+      return recommendMovie();
+  }
+  else if (res.value == 1) {
+      delete options[1];
+      return recommendSong();
+  }
+  else if (res.value == 2) {
+      delete options[2];
+      return catFacts();
+  }
+  else {
+      bot.message.add({
+        delay:delay,
+        content:'Ok! Nice chatting with you, ' +name+'. If you wanna know how I was made, just visit me [here](https://github.com/TuulikkiLaine/chatbot)'
+      })
+  }
+}
+
+function goForward() {
+  return bot.message.add({
+    content:'What would you like to do next?',
+    delay:delay,
+    })
+    .then(function() {
+      let show_options = options.filter(obj => true);
+      return bot.action.button({
+        action: show_options
+      });
+    }).then(function(res) {
+      showOptions(res)
+    })
+}
 
 function recommendMovie() {
-    bot.message.add('What are you in the mood for?')
+    bot.message.add(
+      {content:'What are you in the mood for?',
+      delay:delay})
     .then(function() {
       return bot.action.button({
+        delay:delay,
         action: [
           {
             text:'Something Sci-fi',
@@ -35,14 +80,74 @@ function recommendMovie() {
       })
     })
     .then(function(res) {
-      bot.message.add('You might like this:')
+      bot.message.add(
+        {content:'You might like this:',
+        delay:delay})
       bot.message.add({
         type:'embed',
-        content:res.value
+        content:res.value,
+        delay:delay,
       })
     })
     .then(function(){
-      return bot.message.add('What would you like to do next?')
+      goForward();
+    });
+
+}
+
+function recommendSong() {
+    bot.message.add(
+    {content:'What are you in the mood for?',
+    delay:delay})
+    .then(function() {
+      return bot.action.button({
+        action: [
+          {
+            text:'Something from 80s',
+            value:'https://www.youtube.com/embed/j2F4INQFjEI'
+          },
+          {
+            text:'Something instrumental and beautiful',
+            value:'https://www.youtube.com/embed/NQXVzg2PiZw'
+          },
+          {
+            text:'Something energetic and rock',
+            value:'https://www.youtube.com/embed/HgzGwKwLmgM'
+          },
+        ]
+      })
+    })
+    .then(function(res) {
+      bot.message.add(
+        {content:'You might like this:',
+        delay:delay})
+      bot.message.add({
+        type:'embed',
+        content:res.value,
+        delay:delay,
+      })
+    })
+    .then(function(){
+      goForward();
+    });
+}
+
+function catFacts() {
+    bot.message.add({
+      content: 'Cats make about 100 different sounds. Dogs make only about 10.',
+      delay:delay
+    }).then(function(){
+      return bot.message.add({
+        content:'The oldest known pet cat was recently found in a 9,500-year-old grave on the Mediterranean island of Cyprus',
+        delay:delay
+      })
+    }).then(function(){
+      return bot.message.add({
+        content:'Approximately 1/3 of cat owners think their pets are able to read their minds.',
+        delay:delay
+      })
+    }).then(function(){
+      goForward();
     })
 }
 
@@ -55,26 +160,13 @@ bot.message.add({
     }
   });
 }).then(function(res) {
-  return bot.message.add('Hi ' + res.value + '! Nice to meet you. What would you like to talk about?');
+  name = res.value
+  return bot.message.add('Hi ' + name + '! Nice to meet you. What would you like to talk about?');
 }).then(function() {
   return bot.action.button({
-    action: options
+    action: options,
+    delay: delay
   });
 }).then(function(res) {
-  if (res.value == 0) {
-      delete options[0];
-      return recommendMovie();
-  }
-  else if (res.value == 1) {
-      delete options[1];
-      return recommendSong();
-  }
-  else {
-      delete options[2];
-      return catFacts();
-  }
-}).then(function() {
-  return bot.action.button({
-    action: options
-  });
+  showOptions(res)
 })
