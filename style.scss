@@ -1,0 +1,68 @@
+$bg: #062F4F;
+$m-bg: #813772;
+
+body {
+    background: $bg;
+}
+
+.bot-wrapper {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.botui-container {
+    background: none;
+}
+
+.botui-messages-container {
+}
+
+.botui-actions-container {
+}
+
+.botui-message {
+
+}
+
+.botui-message-content {
+  color:$bg;
+
+  &.human {
+    background: $m-bg;
+  }
+
+  &.text {
+  }
+
+  &.embed {
+    background: #000;
+    padding:2px;
+    border-radius: 0;
+  }
+}
+
+.botui-message-content-link {
+}
+
+.botui-actions-text-input {
+    color:#fff;
+    border-bottom:1px solid #fff;
+}
+
+.botui-actions-text-submit {
+
+}
+
+.botui-actions-buttons-button {
+    box-shadow: none;
+    transition:all 0.2s ease;
+    background: $m-bg;
+    &:focus {
+        outline:none;
+    }
+    &:hover {
+        transform:scale(0.95);
+    }
+
+}

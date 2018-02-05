@@ -135,16 +135,16 @@ function recommendSong() {
 function catFacts() {
     bot.message.add({
       content: 'Cats make about 100 different sounds. Dogs make only about 10.',
-      delay:delay
+      delay:delay*2
     }).then(function(){
       return bot.message.add({
         content:'The oldest known pet cat was recently found in a 9,500-year-old grave on the Mediterranean island of Cyprus',
-        delay:delay
+        delay:delay*2
       })
     }).then(function(){
       return bot.message.add({
         content:'Approximately 1/3 of cat owners think their pets are able to read their minds.',
-        delay:delay
+        delay:delay*2
       })
     }).then(function(){
       goForward();
@@ -157,7 +157,8 @@ bot.message.add({
     return bot.action.text({
     action: {
       placeholder: 'Your name'
-    }
+    },
+    delay:delay
   });
 }).then(function(res) {
   name = res.value
