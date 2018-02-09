@@ -57,6 +57,33 @@ function goForward() {
     })
 }
 
+
+
+function getRandomVideo(query) {
+      gapi.client.setApiKey('AIzaSyCleeVE-dlnj2bR4jRU8GYLwKOmSHBNyhA');
+      gapi.client.load('youtube', 'v3', function() {
+        console.log(query)
+        var request = gapi.client.youtube.search.list({
+            q: query,
+            part: 'snippet',
+            maxResults: 50
+        });
+        console.log(request)
+        request.execute(function(response)  {
+            var rand  = Math.floor(Math.random() * Math.floor(50));
+            var selected_video = response.items[rand].id.videoId;
+            bot.message.add(
+              {content:'You might like this:',
+              delay:delay})
+            bot.message.add({
+              type:'embed',
+              content:'https://www.youtube.com/embed/'+selected_video,
+              delay:delay,
+            })
+        });
+      });
+}
+
 function recommendMovie() {
     bot.message.add(
       {content:'What are you in the mood for?',
@@ -67,28 +94,21 @@ function recommendMovie() {
         action: [
           {
             text:'Something sci-fi',
-            value:'https://www.youtube.com/embed/Q0CbN8sfihY'
+            value:'scifi movies 2017 trailer'
           },
           {
             text:'Something scary',
-            value:'https://www.youtube.com/embed/W2ot6ogGZNc'
+            value:'horror movies 2017 trailer'
           },
           {
             text:'Something with music',
-            value:'https://www.youtube.com/embed/0pdqf4P9MB8'
+            value:'musical movies 2017 trailer'
           },
         ]
       })
     })
     .then(function(res) {
-      bot.message.add(
-        {content:'You might like this:',
-        delay:delay})
-      bot.message.add({
-        type:'embed',
-        content:res.value,
-        delay:delay,
-      })
+      getRandomVideo(res.value);
     })
     .then(function(){
       goForward();
@@ -105,28 +125,21 @@ function recommendSong() {
         action: [
           {
             text:'Something from the 80s',
-            value:'https://www.youtube.com/embed/j2F4INQFjEI'
+            value:'80s hits'
           },
           {
             text:'Something instrumental and beautiful',
-            value:'https://www.youtube.com/embed/NQXVzg2PiZw'
+            value:'classical music'
           },
           {
             text:'Something energetic and rock',
-            value:'https://www.youtube.com/embed/HgzGwKwLmgM'
+            value:'classic rock'
           },
         ]
       })
     })
     .then(function(res) {
-      bot.message.add(
-        {content:'You might like this:',
-        delay:delay})
-      bot.message.add({
-        type:'embed',
-        content:res.value,
-        delay:delay,
-      })
+      getRandomVideo(res.value);
     })
     .then(function(){
       goForward();
