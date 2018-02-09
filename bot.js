@@ -80,6 +80,9 @@ function getRandomVideo(query) {
               content:'https://www.youtube.com/embed/'+selected_video,
               delay:delay,
             })
+            .then(function(res) {
+              goForward()
+            })
         });
       });
 }
@@ -109,9 +112,6 @@ function recommendMovie() {
     })
     .then(function(res) {
       getRandomVideo(res.value);
-    })
-    .then(function(){
-      goForward();
     });
 
 }
@@ -140,9 +140,6 @@ function recommendSong() {
     })
     .then(function(res) {
       getRandomVideo(res.value);
-    })
-    .then(function(){
-      goForward();
     });
 }
 
